@@ -1,0 +1,54 @@
+<div>
+    <p>我是父组件--这是父组件 传递 数据给子组件</p>
+    <p>过3秒钟子组件会自行改变自己的数据，但是父组件数据不会被改变，也就是数据单项的</p>
+</div>
+<div>
+    <input type="text" placeholder="请输入股票代码" [(ngModel)]="stock">
+
+    <app-order [stockCode]="stock" [amount]="100"></app-order>
+</div>
+
+
+<div style="margin-top: 30px;">
+<hr>
+
+</div>
+
+<div>
+    我是父组件--这是父组件 接收 子组件传递过来的数据
+    <p>这是在父组件外部接收到的数据</p>
+    <p>股票代码是 {{priceQuote.stockCode}}， 价格是 {{ priceQuote.lastPrice | number: '3.2-4' }}</p>
+</div>
+<!-- 绑定子组件传递过来的 lastPrice 事件，然后父组件调用 priceQuoteHandler($event) 函数进行处理-->
+<app-price-quote (lastPrice)="priceQuoteHandler($event)" ></app-price-quote>
+
+
+<div style="margin-top: 30px;">
+<hr>
+
+
+<!-- 绑定子组件传递过来的 buy 事件，然后父组件调用 buyHandler($event) 函数进行处理-->
+<div>
+    两了组件通过父组件进行数据通信<br>
+    父绑定子组件传递过来的 buy 事件，然后父组件调用 buyHandler($event) 函数进行处理<br>
+    buyHandler函数会更新 app-order2组件的数据
+</div>
+<p></p>
+<app-price-quote (buy)="buyHandler($event)" ></app-price-quote>
+<app-order2 [priceQuote]="priceQuote2" ></app-order2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
